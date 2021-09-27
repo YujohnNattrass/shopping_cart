@@ -1,9 +1,19 @@
 import React from "react";
-
+import {useState, useEffect } from "react"
+import Header from "./header"
+import Main from "./main"
+import data from "../lib/data"
 const App = () => {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    setProducts(data)
+  }, [])
+
   return (
     <div id="app">
-      <h1>Welcome to the Thunderdome</h1>
+      <Header />
+      <Main products={products} />
     </div>
   );
 };

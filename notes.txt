@@ -1,0 +1,11 @@
+<app>
+  <header>
+    title
+    <cart>
+  <main>
+    <productlist>
+      title
+      <product>
+      product details
+      <edit form>
+    <addproductform>
