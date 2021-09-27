@@ -1,10 +1,10 @@
 const Cart = () => {
   return (
-    <div class="cart">
+    <div className="cart">
     <h2>Your Cart</h2>
     <p>Your cart is empty</p>
     <p>Total: $0</p>
-    <a class="button checkout disabled">Checkout</a>
+    <a className="button checkout disabled">Checkout</a>
   </div>
   )
 }
@@ -13,19 +13,18 @@ export default Cart
 
 //  with no items:
 /* 
-      <div class="cart">
+      <div className="cart">
         <h2>Your Cart</h2>
         <p>Your cart is empty</p>
         <p>Total: $0</p>
-        <a class="button checkout disabled">Checkout</a>
+        <a className="button checkout disabled">Checkout</a>
       </div>
 */
 
 /*
-
-      <div class="cart">
+      <div className="cart">
         <h2>Your Cart</h2>
-        <table class="cart-items">
+        <table className="cart-items">
           <tr>
             <th>Item</th>
             <th>Quantity</th>
@@ -43,10 +42,9 @@ export default Cart
           </tr>
 
           <tr>
-            <td colspan="3" class="total">Total: $729.98</td>
+            <td colspan="3" className="total">Total: $729.98</td>
           </tr>
         </table>
-        <a class="button checkout">Checkout</a>
+        <a className="button checkout">Checkout</a>
       </div>
-
 */
