@@ -1,4 +1,7 @@
-const Product = ({product}) => {
+const Product = ({product, onDelete}) => {
+  const handleDelete = () => {
+    onDelete(product._id)
+  }
   return (
     <div className="product">
     <div className="product-details">
@@ -9,7 +12,7 @@ const Product = ({product}) => {
         <a className="button add-to-cart">Add to Cart</a>
         <a className="button edit">Edit</a>
       </div>
-      <a className="delete-button"><span>X</span></a>
+      <a className="delete-button" onClick={handleDelete}><span>X</span></a>
     </div>
   </div>
   )

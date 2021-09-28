@@ -1,4 +1,4 @@
-import Cart from "./cart"
+import Cart from "./Cart"
 const Header = () => {
   return (
     <header>
@@ -9,4 +9,3 @@ const Header = () => {
 }
 
 export default Header
-
