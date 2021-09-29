@@ -1,4 +1,14 @@
-const Product = ({product}) => {
+import axios from "axios"
+
+const Product = ({product, products, setProducts}) => {
+  const id = product._id
+  console.log(id)
+  const deleteItem = () => {
+    axios.delete(`http://localhost:5000/api/products/${id}`)
+    let newProducts = products.filter(p => p._id !== id)
+    setProducts(newProducts)
+  } 
+
   return (
     <div className="product">
     <div className="product-details">
@@ -9,7 +19,7 @@ const Product = ({product}) => {
         <a className="button add-to-cart">Add to Cart</a>
         <a className="button edit">Edit</a>
       </div>
-      <a className="delete-button"><span>X</span></a>
+      <a className="delete-button" onClick={deleteItem}><span>X</span></a>
     </div>
   </div>
   )

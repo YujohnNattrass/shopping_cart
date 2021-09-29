@@ -1,11 +1,11 @@
 import ProductList from "./productlist"
-import AddProductForm from "./addproductform"
+import ToggleableProductForm from "./toggleableProductForm"
 
-const Main = ({products}) => {
+const Main = ({products, setProducts}) => {
   return (
     <main>
-      <ProductList products={products} />
-      <AddProductForm />
+      <ProductList products={products} setProducts={setProducts}/>
+      <ToggleableProductForm products={products} setProducts={setProducts}/>
     </main>
   )
 }
