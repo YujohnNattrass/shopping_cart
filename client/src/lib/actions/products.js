@@ -1,27 +1,29 @@
+import * as types from "../constants/types";
+
 export const getAllProducts = (products) => {
   return {
-    type: "FETCH_PRODUCTS",
+    type: types.FETCH_PRODUCTS,
     payload: { products },
   };
 };
 
 export const addNewProduct = (product) => {
   return {
-    type: "ADD_PRODUCT",
+    type: types.ADD_PRODCUT,
     payload: { product },
   };
 };
 
 export const deleteProduct = (productID) => {
   return {
-    type: "DELETE_PRODUCT",
+    type: types.DELETE_PRODUCT,
     payload: { productID },
   };
 };
 
 export const editProduct = (id, data) => {
   return {
-    type: "EDIT_PRODUCT",
+    type: types.EDIT_PRODUCT,
     payload: { id, data },
   };
 };

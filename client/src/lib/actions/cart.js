@@ -1,19 +1,21 @@
+import * as types from "../constants/types";
+
 export const addToCart = (item) => {
   return {
-    type: "ADD_TO_CART",
+    type: types.ADD_TO_CART,
     payload: { item },
   };
 };
 
 export const checkout = () => {
   return {
-    type: "CHECKOUT",
+    type: types.CHECKOUT,
   };
 };
 
 export const getAllCartItems = (items) => {
   return {
-    type: "FETCH_CART",
+    type: types.FETCH_CART,
     payload: { items },
   };
 };
