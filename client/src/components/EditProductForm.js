@@ -9,7 +9,7 @@ const EditProductForm = ({ product, onCancel }) => {
   const [quantity, setQuantity] = useState(product.quantity);
   const dispatch = useDispatch();
 
-  const onUpdate = async () => {
+  const handleEdit = async () => {
     const newInfo = { title, price, quantity };
     const id = product._id;
     try {
@@ -62,7 +62,7 @@ const EditProductForm = ({ product, onCancel }) => {
         </div>
 
         <div className="actions form-actions">
-          <a className="button" onClick={onUpdate}>
+          <a className="button" onClick={handleEdit}>
             Update
           </a>
           <a className="button" onClick={onCancel}>

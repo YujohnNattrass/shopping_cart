@@ -7,16 +7,17 @@ import { addToCart } from "../lib/actions/cart";
 
 const Product = ({ product }) => {
   const [editFormOpen, setEditFormOpen] = useState(false);
-
   const dispatch = useDispatch();
 
   const handleAddToCart = async () => {
+    if (product.quantity <= 0) return;
+
     const body = {
       productId: product._id,
       title: product.title,
       price: product.price,
     };
-    if (product.quantity <= 0) return;
+
     try {
       await axios.post(`/api/cart`, body);
       dispatch(addToCart(body));
@@ -52,12 +53,7 @@ const Product = ({ product }) => {
         <p className="quantity">{product.quantity} left in stock</p>
         {!editFormOpen ? (
           <div className="actions product-actions">
-            <a
-              className={showButton()}
-              onClick={() => {
-                handleAddToCart();
-              }}
-            >
+            <a className={showButton()} onClick={handleAddToCart}>
               Add to Cart
             </a>
             <a className="button edit" onClick={toggleEditForm}>
