@@ -1,19 +1,14 @@
 import Product from "./Product";
-const ProductList = ({ onAddToCart, onEditProduct, products, onDelete }) => {
+import { useSelector } from "react-redux";
+
+const ProductList = () => {
+  const products = useSelector((store) => store.products);
+
   return (
     <div className="product-listing">
       <h2>Products</h2>
       {products.map((product) => {
-        return (
-          <Product
-            onAddToCart={onAddToCart}
-            onEditProduct={onEditProduct}
-            products={products}
-            key={product._id}
-            product={product}
-            onDelete={onDelete}
-          />
-        );
+        return <Product key={product._id} product={product} />;
       })}
     </div>
   );

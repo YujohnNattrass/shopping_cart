@@ -1,6 +1,26 @@
 import CartItem from "./CartItem";
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { checkout } from "../lib/actions/cart";
+import axios from "axios";
 
-const Cart = ({ cart, handleCheckout }) => {
+const Cart = () => {
+  const [total, setTotal] = useState("");
+  const cart = useSelector((store) => store.cart);
+
+  useEffect(() => {
+    const totalPrice = () => {
+      const tot = cart.reduce((total, item) => {
+        return total + item.price * item.quantity;
+      }, 0);
+
+      setTotal(`$${tot.toFixed(2)}`);
+    };
+    totalPrice();
+  }, [cart]);
+
+  const dispatch = useDispatch();
+
   const cartIsEmpty = () => {
     return cart.length === 0;
   };
@@ -9,12 +29,13 @@ const Cart = ({ cart, handleCheckout }) => {
     return !cartIsEmpty() ? "button checkout" : "button checkout disabled";
   };
 
-  const totalPrice = () => {
-    const total = cart.reduce((total, item) => {
-      return total + item.price * item.quantity;
-    }, 0);
-
-    return `$${total.toFixed(2)}`;
+  const handleCheckout = async () => {
+    try {
+      await axios.post("/api/cart/checkout");
+      dispatch(checkout());
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   return (
@@ -41,7 +62,7 @@ const Cart = ({ cart, handleCheckout }) => {
 
             <tr>
               <td colSpan="3" className="total">
-                Total: {totalPrice()}
+                Total: {total}
               </td>
             </tr>
           </tbody>

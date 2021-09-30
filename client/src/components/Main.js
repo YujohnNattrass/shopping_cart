@@ -1,24 +1,11 @@
 import ProductList from "./ProductList";
 import AddProductForm from "./AddProductForm";
 
-const Main = ({
-  onAddToCart,
-  onEditProduct,
-  setProducts,
-  products,
-  onSubmit,
-  onDelete,
-}) => {
+const Main = () => {
   return (
     <main>
-      <ProductList
-        onAddToCart={onAddToCart}
-        onEditProduct={onEditProduct}
-        setProducts={setProducts}
-        products={products}
-        onDelete={onDelete}
-      />
-      <AddProductForm onSubmit={onSubmit} />
+      <ProductList />
+      <AddProductForm />
     </main>
   );
 };

@@ -1,11 +1,37 @@
 import EditProductForm from "./EditProductForm";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { deleteProduct } from "../lib/actions/products";
+import axios from "axios";
+import { addToCart } from "../lib/actions/cart";
 
-const Product = ({ onAddToCart, onEditProduct, product, onDelete }) => {
+const Product = ({ product }) => {
   const [editFormOpen, setEditFormOpen] = useState(false);
 
-  const handleDelete = () => {
-    onDelete(product._id);
+  const dispatch = useDispatch();
+
+  const handleAddToCart = async () => {
+    const body = {
+      productId: product._id,
+      title: product.title,
+      price: product.price,
+    };
+    if (product.quantity <= 0) return;
+    try {
+      await axios.post(`/api/cart`, body);
+      dispatch(addToCart(body));
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const handleDelete = async () => {
+    try {
+      await axios.delete(`/api/products/${product._id}`);
+      dispatch(deleteProduct(product._id));
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   const toggleEditForm = () => {
@@ -29,7 +55,7 @@ const Product = ({ onAddToCart, onEditProduct, product, onDelete }) => {
             <a
               className={showButton()}
               onClick={() => {
-                onAddToCart(product);
+                handleAddToCart();
               }}
             >
               Add to Cart
@@ -40,11 +66,7 @@ const Product = ({ onAddToCart, onEditProduct, product, onDelete }) => {
           </div>
         ) : null}
         {editFormOpen ? (
-          <EditProductForm
-            onEditProduct={onEditProduct}
-            product={product}
-            onCancel={toggleEditForm}
-          />
+          <EditProductForm product={product} onCancel={toggleEditForm} />
         ) : (
           <a className="delete-button" onClick={handleDelete}>
             <span>X</span>

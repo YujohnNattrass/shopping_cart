@@ -1,17 +1,23 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { editProduct } from "../lib/actions/products";
+import axios from "axios";
 
-const EditProductForm = ({ onEditProduct, product, onCancel }) => {
+const EditProductForm = ({ product, onCancel }) => {
   const [title, setTitle] = useState(product.title);
   const [price, setPrice] = useState(product.price);
   const [quantity, setQuantity] = useState(product.quantity);
+  const dispatch = useDispatch();
 
-  const handleEditProduct = () => {
+  const onUpdate = async () => {
     const newInfo = { title, price, quantity };
-    onEditProduct(product._id, newInfo);
-  };
-
-  const onUpdate = () => {
-    handleEditProduct();
+    const id = product._id;
+    try {
+      const res = await axios.put(`/api/products/${id}`, newInfo);
+      dispatch(editProduct(id, res.data));
+    } catch (e) {
+      console.error(e);
+    }
     onCancel();
   };
 

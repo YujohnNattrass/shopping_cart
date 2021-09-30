@@ -1,23 +1,32 @@
 import { useState } from "react";
-const AddProductForm = ({ onSubmit }) => {
+import { useDispatch } from "react-redux";
+import { addNewProduct } from "../lib/actions/products";
+import axios from "axios";
+
+const AddProductForm = () => {
   const [addFormVisible, setAddFormVisible] = useState(false);
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
   const [quantity, setQuantity] = useState("");
+  const dispatch = useDispatch();
+
   const handleAddFormClick = () => {
     setAddFormVisible(!addFormVisible);
   };
-  const handleSubmitNewProduct = () => {
-    const newProduct = {
-      title,
-      price: parseFloat(price),
-      quantity: parseInt(quantity),
-    };
-    onSubmit(newProduct, () => {
-      setTitle("");
-      setPrice("");
-      setQuantity("");
-    });
+
+  const handleSubmitNewProduct = async () => {
+    try {
+      const product = {
+        title,
+        price: parseFloat(price),
+        quantity: parseInt(quantity),
+      };
+      const response = await axios.post("/api/products", product);
+      dispatch(addNewProduct(response.data));
+      handleAddFormClick();
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
