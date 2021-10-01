@@ -11,7 +11,14 @@ const AddProductForm = () => {
 
   const handleAddFormClick = () => {
     setAddFormVisible(!addFormVisible);
+    resetForm();
   };
+
+  const resetForm = () => {
+    setTitle("");
+    setPrice("");
+    setQuantity("");
+  }
 
   const handleSubmitNewProduct = async () => {
     const product = {
