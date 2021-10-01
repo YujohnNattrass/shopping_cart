@@ -1,21 +1,46 @@
 import * as types from "../constants/types";
+import apiClient from "../apiClient";
 
-export const addToCart = (item) => {
+const addToCartSuccess = (item) => {
   return {
     type: types.ADD_TO_CART,
     payload: { item },
   };
 };
 
-export const checkout = () => {
+export const addToCart = (item) => {
+  return (dispatch) => {
+    apiClient.addToCart(item, () => {
+      dispatch(addToCartSuccess(item));
+    })
+  }
+}
+
+const checkoutSuccess = () => {
   return {
     type: types.CHECKOUT,
   };
 };
 
-export const getAllCartItems = (items) => {
+export const checkout = () => {
+  return (dispatch) => {
+    apiClient.checkout(() => {
+      dispatch(checkoutSuccess());
+    })
+  }
+}
+
+const getAllCartItemsSuccess = (items) => {
   return {
     type: types.FETCH_CART,
     payload: { items },
   };
 };
+
+export const getAllCartItems = () => {
+  return (dispatch) => {
+    apiClient.fetchCart(items => {
+      dispatch(getAllCartItemsSuccess(items));
+    })
+  }
+}

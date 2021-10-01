@@ -30,12 +30,7 @@ const Cart = () => {
   };
 
   const handleCheckout = async () => {
-    try {
-      await axios.post("/api/cart/checkout");
-      dispatch(checkout());
-    } catch (e) {
-      console.error(e);
-    }
+    dispatch(checkout());
   };
 
   return (
